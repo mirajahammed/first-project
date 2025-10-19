@@ -1,0 +1,114 @@
+class Shape{
+    void Area(){
+        System.out.println("area of some shapes are.");
+    }
+}
+
+    class TwoDimensional extends Shape{
+
+    }
+    class Circle extends TwoDimensional{
+        double radius;
+        Circle(double radius){
+            this.radius=radius;
+
+        }
+    
+    void Area(){
+        double a= Math.PI*radius*radius;
+        System.out.println("The area of circle is " + a);
+    }
+    }
+    class Square extends TwoDimensional{
+        double length;
+        Square(double length){
+            this.length=length;
+
+        }
+        void Area(){
+            double a= length*length;
+            System.out.println("the are of Square is:" +a);
+        }
+
+    }
+    class Triangle extends TwoDimensional{
+        double length ; double width;
+        Triangle(double length,double width){
+            this.length=length;
+            this.width=width;
+
+        }
+        void Area(){
+            double a= 0.5*width*length;
+            System.out.println("the area of Triangle is :" +a);
+
+        }
+    }
+
+
+
+class ThreeDimensional extends Shape{
+
+}
+class Sphere extends ThreeDimensional{
+    double radius;
+    Sphere(double radius){
+
+    
+    this.radius=radius;
+    }
+    void Area(){
+        double a= 4*Math.PI*radius*radius;
+        System.out.println("the area of Sphere is "+a);
+
+    }
+
+}
+class  Cube extends ThreeDimensional{
+    double side;
+    Cube(double side){
+        this.side=side;
+
+    }
+    void Area(){
+        double a= 6*side*side;
+        System.out.println("the ara of the cube is :" +a);
+    }
+}
+class Tetrahedron extends ThreeDimensional{
+    double side;
+
+     Tetrahedron( double side) {
+        this.side=side;
+    }
+    void Area(){
+        double a=Math.sqrt(3)*side*side;
+        System.out.println("The area of the Tetrahedron is :" +a);
+
+    }
+}
+   public class ShapeTest {
+    public static void main(String[] args) {
+        Circle c=new Circle(5);
+        Square s = new Square(4);
+        Triangle t = new Triangle(6,3);
+
+        Sphere sp= new Sphere(5);
+        Cube cu = new Cube(3);
+        Tetrahedron th= new Tetrahedron(4);
+        System.out.println("--------2D Shapes--------");
+        c.Area();
+        s.Area();
+        t.Area();
+        System.out.println("------- 3D shapes--------");
+        sp.Area();
+        cu.Area();
+        th.Area();
+
+
+    }
+}
+   
+
+
+
