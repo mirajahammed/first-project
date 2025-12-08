@@ -37,7 +37,7 @@ Account(int id, String name, String email, double balance) {
         }
  boolean deposit(int id, double amount) {
             Account a = get(id);
-            if (a == null || a.frozen) return false;
+            if (a == null) return false;
 
             a.balance += amount;
             a.Collectkora.add("Deposit: " + amount);
