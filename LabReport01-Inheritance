@@ -1,0 +1,43 @@
+class Employee{
+    String name;
+    int id;
+    double basicSalary;
+    
+    Employee(String name,int id,double basicSalary){
+        this.name=name;
+        this.id=id;
+        this.basicSalary=basicSalary;
+    }
+    void displayInfo(){
+        System.out.println("Name of Employee is: "+name);
+        System.out.println("Id of the Employee is: "+id);
+        System.out.println("Basic salary is: "+basicSalary);
+        
+    }
+}
+
+class Manager extends Employee{
+    String department;
+    
+    Manager(String name,int id,double basicSalary,String department){
+        super(name,id,basicSalary);
+        this.department=department;
+    }
+    @Override
+    void displayInfo(){
+        super.displayInfo();
+        System.out.println("Name of the Department:"+department);
+    }
+}
+
+public class Main1{
+    public static void main(String [] args){
+        Employee employee=new Employee("Akbar",242002110,20000 );
+        Manager manager=new Manager("Anik",242002100,40000,"Sales");
+        
+        System.out.println("    Employee Details    \n");
+        employee.displayInfo();
+        System.out.println("\n    Manager Details    \n");
+        manager.displayInfo();
+    }
+}
