@@ -1,0 +1,64 @@
+
+class BankAccount {
+    private int accountNumber;
+    private String accountHolderName;
+    private double balance;
+
+    public BankAccount(int accountNumber, String accountHolderName, double balance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        setBalance(balance); 
+    }
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+    
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public void setAccountHolderName(String accountHolderName) {
+        this.accountHolderName = accountHolderName;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        if (0>balance) {
+            System.out.println("Error: Balance cannot be negative. Value not updated.");
+        } else {
+            this.balance = balance;
+        }
+    }
+ public void displayAccountInfo() {
+        System.out.println("\n          \n");
+        System.out.println("Account Number: "+ accountNumber);
+        System.out.println("Account Holder: "+ accountHolderName);
+        System.out.println("Balance: "+ balance);
+    }
+}
+
+public class Main2 {
+    public static void main(String[] args) {
+        
+        BankAccount account1 = new BankAccount(01, "Yasin Alom", 500202);
+        BankAccount account2 = new BankAccount(02, "Habibullah", 18016 );
+        BankAccount account3 = new BankAccount(03, "Arman Alif", 39530 );
+
+        
+        account1.setBalance(12000);       
+        account2.setBalance(-11011);        
+        account3.setBalance(30000);       
+        
+        account1.displayAccountInfo();
+        account2.displayAccountInfo();
+        account3.displayAccountInfo();
+
+        
+    }
+}
