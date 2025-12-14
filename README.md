@@ -23,40 +23,29 @@ c.  Sample output:
 d.Author: Md.Miraj Ahammed
   Email:shahriarmiraj321@gmail.com
 
+----------------------
+|      Employee       |
+----------------------
+| - name: String      |
+| - id: int           |
+| - basicSalary: double|
+----------------------
+| + Employee(name, id, basicSalary) |
+| + displayInfo(): void              |
+----------------------
+           ▲
+           |
+           |
+----------------------
+|      Manager        |
+----------------------
+| - department: String|
+----------------------
+| + Manager(name, id, basicSalary, department) |
+| + displayInfo(): void                        |
+----------------------
 
-2.LabReport02-Encapsulation:
 
-a.Short Description
-This Java program demonstrates encapsulation by creating a BankAccount class.
-All account information is private, and public getter and setter methods are used for controlled access.
-Negative balances are not allowed.
-
-b.Features
-Encapsulates account details using private fields.
-Provides public getter and setter methods for controlled access.
-Validates balance to prevent negative values.
-Creates multiple BankAccount objects.
-Demonstrates how private fields cannot be accessed directly from outside the class.
-
-C.Class Structure
- BankAccount Class
-.Fields (Private):
-   accountNumber (int)
-   accountHolderName (String)
-   balance (double)
-.methods (Public):
-   getAccountNumber(), setAccountNumber()
-   getAccountHolderName(), setAccountHolderName()
-   getBalance(), setBalance() → validates for negative values
-   displayAccountInfo() → prints all account details
-
-D.Main2 Class
-  Creates three BankAccount objects.
-  Updates balances using setter methods.
-  Displays account details using the displayAccountInfo() method.
-  
-E.Author:Md.Miraj Ahammed
-  Email:shahriarmiraj321@gmail.com
 
 
       
