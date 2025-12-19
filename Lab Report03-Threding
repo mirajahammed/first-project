@@ -1,30 +1,24 @@
 
-
 class SharedCounter {
-    private int count = 0;
-    
-    public synchronized void increment() {
-        count++;
-    }
-
-    public synchronized int getCount() {
-        return count;
+    private int counter = 0;
+    public synchronized int incrementAndGet() {
+        counter++;
+        return counter;
     }
 }
 
+class NumberPrinter extends Thread {
+    private SharedCounter sharedCounter;
 
-class NumberThread extends Thread {
-    private SharedCounter counter;
-
-    public NumberThread(SharedCounter counter) {
-        this.counter = counter;
+    public NumberPrinter(SharedCounter sharedCounter) {
+        this.sharedCounter = sharedCounter;
     }
 
     @Override
     public void run() {
         for (int i = 1; i <= 10; i++) {
-            counter.increment();
-            System.out.println("NumberThread: " + i + " | Shared Counter: " + counter.getCount());
+            int currentCounter = sharedCounter.incrementAndGet();
+            System.out.println("Number Thread: " + i + " (Shared Counter: " + currentCounter + ")");
             try {
                 Thread.sleep(500); 
             } catch (InterruptedException e) {
@@ -34,20 +28,22 @@ class NumberThread extends Thread {
     }
 }
 
-class SquareRunnable implements Runnable {
-    private SharedCounter counter;
 
-    public SquareRunnable(SharedCounter counter) {
-        this.counter = counter;
+class SquarePrinter implements Runnable {
+    private SharedCounter sharedCounter;
+
+    public SquarePrinter(SharedCounter sharedCounter) {
+        this.sharedCounter = sharedCounter;
     }
 
     @Override
     public void run() {
         for (int i = 1; i <= 10; i++) {
-            counter.increment();
-            System.out.println("SquareRunnable: " + (i * i) + " | Shared Counter: " + counter.getCount());
+            int square = i * i;
+            int currentCounter = sharedCounter.incrementAndGet();
+            System.out.println("Square Thread: " + square + " (Shared Counter: " + currentCounter + ")");
             try {
-                Thread.sleep(500);
+                Thread.sleep(500); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -55,21 +51,26 @@ class SquareRunnable implements Runnable {
     }
 }
 
+
 public class MultithreadingDemo {
     public static void main(String[] args) {
-        SharedCounter counter = new SharedCounter();
+        SharedCounter sharedCounter = new SharedCounter();
 
-        Thread t1 = new NumberThread(counter);
-        Thread t2 = new Thread(new SquareRunnable(counter));
-        t1.start();
-        t2.start();
+        
+        Thread numberThread = new NumberPrinter(sharedCounter);
+        Thread squareThread = new Thread(new SquarePrinter(sharedCounter));
+
+        
+        numberThread.start();
+        squareThread.start();
+
         try {
-            t1.join();
-            t2.join();
+            numberThread.join();
+            squareThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        System.out.println("Both threads finished execution. Final Shared Counter: " + counter.getCount());
+        System.out.println("Both threads have finished execution.");
     }
 }
