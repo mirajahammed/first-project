@@ -375,10 +375,3 @@ public class BankManagementSystem {
         new LoginFrame();
     }
 }
-
-
-            a.balance += amount;
-            a.Collectkora.add("Deposit: " + amount);
-            return true;
-           
-        }
