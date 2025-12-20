@@ -1,0 +1,97 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class CircleDrawerApp {
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new CircleDrawerFrame());
+    }
+}
+
+class CircleDrawerFrame extends JFrame {
+
+    private DrawPanel drawPanel;
+    private JButton drawButton, clearButton;
+    private Random random;
+
+    public CircleDrawerFrame() {
+        setTitle("Circle Drawer");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        random = new Random();
+        drawPanel = new DrawPanel();
+        add(drawPanel, BorderLayout.CENTER);
+        drawButton = new JButton("Draw Circle");
+        clearButton = new JButton("Clear");
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(drawButton);
+        buttonPanel.add(clearButton);
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        
+        drawButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int radius = 50;
+                int x = random.nextInt(drawPanel.getWidth() - radius);
+                int y = random.nextInt(drawPanel.getHeight() - radius);
+                drawPanel.addCircle(x, y, radius);
+            }
+        });
+
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            drawPanel.clearCircles();
+            }
+        });
+
+        setVisible(true);
+    }
+}
+
+
+class DrawPanel extends JPanel {
+
+    private ArrayList<Circle> circles;
+
+    public DrawPanel() {
+        setBackground(Color.WHITE);
+        circles = new ArrayList<>();
+    }
+
+     public void addCircle(int x, int y, int radius) {
+        circles.add(new Circle(x, y, radius));
+        repaint();
+    }
+  
+    public void clearCircles() {
+        circles.clear();
+        repaint();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.BLUE);
+        for (Circle c : circles) {
+            g.fillOval(c.x, c.y, c.radius, c.radius);
+        }
+    }
+}
+
+
+class Circle {
+    int x, y, radius;
+
+    public Circle(int x, int y, int radius) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+    }
+}
