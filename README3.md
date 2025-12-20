@@ -17,29 +17,32 @@ How thread.sleep() works to control execution speed.
 How to use join() to make sure threads finish before continuing in the main program.
 
 UML DIAGRAM:
-+--------------------+
-|   SharedCounter    |
-+--------------------+
-| - counter: int     |
-+--------------------+
-| + incrementAndGet(): int |
-+--------------------+
++----------------------------+
+|       SharedCounter        |
++----------------------------+
+| - counter: int             |
++----------------------------+
+| + incrementAndGet(): int   |
++----------------------------+
+           ^
+           |
+           |
++----------------------------+          +----------------------------+
+|      NumberPrinter         |          |      SquarePrinter         |
++----------------------------+          +----------------------------+
+| - sharedCounter: SharedCounter |      | - sharedCounter: SharedCounter |
++----------------------------+          +----------------------------+
+| + run(): void             |          | + run(): void             |
++----------------------------+          +----------------------------+
+           ^                                ^
+           |                                |
+           +--------------------------------+
+                         |
+             +----------------------------+
+             |    MultithreadingDemo      |
+             +----------------------------+
+             | + main(args: String[]): void |
+             +----------------------------+
 
-          ^
-          |
-          |
-+--------------------+             +--------------------+
-|   NumberPrinter    |             |   SquarePrinter    |
-+--------------------+             +--------------------+
-| - sharedCounter: SharedCounter |  | - sharedCounter: SharedCounter |
-+--------------------+             +--------------------+
-| + run(): void      |             | + run(): void      |
-+--------------------+             +--------------------+
-          ^                                 ^
-          |                                 |
-          |                                 |
-+--------------------+                      |
-| MultithreadingDemo  |<--------------------+
-+--------------------+
-| + main(args: String[]): void |
-+--------------------+
+
+
